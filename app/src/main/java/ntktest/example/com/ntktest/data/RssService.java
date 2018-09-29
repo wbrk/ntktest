@@ -1,4 +1,4 @@
-package ntktest.example.com.ntktest;
+package ntktest.example.com.ntktest.data;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

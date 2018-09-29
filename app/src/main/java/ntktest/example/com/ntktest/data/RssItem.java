@@ -1,4 +1,4 @@
-package ntktest.example.com.ntktest;
+package ntktest.example.com.ntktest.data;
 
 import android.support.annotation.NonNull;
 

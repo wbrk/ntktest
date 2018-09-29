@@ -1,9 +1,14 @@
-package ntktest.example.com.ntktest;
+package ntktest.example.com.ntktest.presentation;
 
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import ntktest.example.com.ntktest.data.DataRetriever;
+import ntktest.example.com.ntktest.R;
+import ntktest.example.com.ntktest.data.RssDocument;
+import ntktest.example.com.ntktest.data.RssItem;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
