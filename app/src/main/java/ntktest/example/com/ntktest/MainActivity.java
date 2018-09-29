@@ -1,57 +1,52 @@
 package ntktest.example.com.ntktest;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import org.simpleframework.xml.convert.AnnotationStrategy;
-import org.simpleframework.xml.core.Persister;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+
+    DataRetriever retriever;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.reload).setOnClickListener(v -> load());
+
+        retriever = new DataRetriever.Builder()
+                .from(Uri.parse("https://meduza.io/rss/all/"))
+                .onSuccess(this::onLoad)
+                .onError(this::onError)
+                .build();
+
+        findViewById(R.id.reload).setOnClickListener(v -> retriever.load());
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        load();
+    protected void onStart() {
+        super.onStart();
+        retriever.load();
     }
 
-    private void load() {
-        Retrofit r = new Retrofit.Builder()
-                .baseUrl("https://example.com")
-                .addConverterFactory(SimpleXmlConverterFactory.createNonStrict(new Persister(new AnnotationStrategy())))
-                .build();
+    @Override
+    protected void onStop() {
+        super.onStop();
+        retriever.cancel();
+    }
 
-        String url = "https://meduza.io/rss/all/";
-        RssService s = r.create(RssService.class);
-        Call<RssDocument> data = s.getData(url);
-        data.enqueue(new Callback<RssDocument>() {
-            @Override
-            public void onResponse(Call<RssDocument> call, Response<RssDocument> response) {
-                RssDocument d = response.body();
-                Log.e(TAG, "onResponse: " + d);
-                for (RssItem i : d.getItems()) {
-                    Log.e(TAG, "onResponse: " + i);
-                }
-            }
+    void onLoad(RssDocument document) {
+        for (RssItem item : document.getItems()) {
+            Log.e(TAG, "onLoad: " + item);
+        }
+    }
 
-            @Override
-            public void onFailure(Call<RssDocument> call, Throwable t) {
-                Log.e(TAG, "onFailure: error: " + t);
-            }
-        });
+    void onError(int code, Throwable t) {
+        if (t != null) {
+            Log.e(TAG, "onError: " + t);
+        } else {
+            Log.e(TAG, "onError: http code " + code);
+        }
     }
 }
