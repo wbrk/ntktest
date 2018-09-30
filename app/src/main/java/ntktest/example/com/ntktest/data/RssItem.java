@@ -12,10 +12,6 @@ public class RssItem {
     private String title = "";
 
     @NonNull
-    @Element(required = false, data = true)
-    private String description = "";
-
-    @NonNull
     @Element(required = false)
     private String link = "";
 
@@ -31,11 +27,6 @@ public class RssItem {
     @NonNull
     public String getLink() {
         return link;
-    }
-
-    @NonNull
-    public String getDescription() {
-        return description;
     }
 
     @NonNull
