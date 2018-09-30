@@ -22,6 +22,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         @BindView(R.id.title)
         public TextView title;
 
+        @BindView(R.id.date)
+        public TextView date;
+
+        @BindView(R.id.source)
+        public TextView source;
+
         public ViewHolder(@NonNull View item) {
             super(item);
             ButterKnife.bind(this, item);
@@ -44,7 +50,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.title.setText(data.get(position).getTitle());
+        RssItem item = data.get(position);
+
+        holder.title.setText(item.getTitle());
+        holder.date.setText(item.getPubDate());
+        holder.source.setText("Meduza");
     }
 
     @Override
