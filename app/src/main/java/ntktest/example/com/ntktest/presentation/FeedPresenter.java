@@ -15,7 +15,7 @@ public class FeedPresenter {
         this.view = view;
         retriever = new DataRetriever.Builder()
                 .from(Uri.parse("https://meduza.io/rss/all/"))
-                .onSuccess(document -> view.showData(document.getItems()))
+                .onSuccess(view::showData)
                 .onError((code, t) -> {
                     Log.i(TAG, "onError: code: " + code);
                     Log.i(TAG, "onError: error: " + t);

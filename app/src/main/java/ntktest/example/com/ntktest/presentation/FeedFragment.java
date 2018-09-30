@@ -80,6 +80,7 @@ public class FeedFragment extends Fragment implements FeedView {
     public void onStop() {
         super.onStop();
         presenter.stop();
+        swipeLayout.setRefreshing(false);
     }
 
     @Override

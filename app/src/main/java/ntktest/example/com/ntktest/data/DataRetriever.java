@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -21,7 +22,7 @@ public class DataRetriever {
     private static final String TAG = "DataRetriever";
 
     public interface OnSuccess {
-        void onSuccess(@NonNull RssDocument document);
+        void onSuccess(@NonNull List<RssItem> data);
     }
 
     public interface OnError {
@@ -75,7 +76,7 @@ public class DataRetriever {
             public void onResponse(Call<RssDocument> call, Response<RssDocument> response) {
                 DataRetriever.this.call = null;
                 if (response.isSuccessful()) {
-                    successListener.onSuccess(response.body());
+                    successListener.onSuccess(response.body().getItems());
                 } else {
                     errorListener.onError(response.code(), null);
                 }
