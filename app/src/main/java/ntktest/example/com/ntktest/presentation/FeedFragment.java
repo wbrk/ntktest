@@ -1,5 +1,6 @@
 package ntktest.example.com.ntktest.presentation;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,8 +51,9 @@ public class FeedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         adapter = new FeedAdapter();
-        recycler.setAdapter(adapter);
+        adapter.setOnItemClickListener(this::onItemClick);
 
+        recycler.setAdapter(adapter);
         recycler.setHasFixedSize(true);
         recycler.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
@@ -99,5 +101,15 @@ public class FeedFragment extends Fragment {
         Log.i(TAG, "onError: " + t);
         Snackbar.make(rootView, "Error", Snackbar.LENGTH_SHORT).show();
         swipeLayout.setRefreshing(false);
+    }
+
+    private void onItemClick(int position) {
+        try {
+            String url = adapter.getData().get(position).getLink();
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
+        } catch (Exception e) {
+            Snackbar.make(rootView, "Couldn't open item", Snackbar.LENGTH_SHORT).show();
+        }
     }
 }
