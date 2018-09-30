@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -33,6 +34,9 @@ public class FeedFragment extends Fragment {
     @BindView(R.id.feed_root)
     View rootView;
 
+    @BindView(R.id.swipe_layout)
+    SwipeRefreshLayout swipeLayout;
+
     private Unbinder unbinder;
 
     private RecyclerView.Adapter adapter;
@@ -58,6 +62,8 @@ public class FeedFragment extends Fragment {
         recycler.setHasFixedSize(true);
         recycler.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
+
+        swipeLayout.setOnRefreshListener(retriever::load);
     }
 
     @Override
@@ -92,10 +98,13 @@ public class FeedFragment extends Fragment {
     private void onLoad(RssDocument document) {
         data.addAll(document.getItems());
         adapter.notifyDataSetChanged();
+
+        swipeLayout.setRefreshing(false);
     }
 
     private void onError(int code, Throwable t) {
         Log.i(TAG, "onError: " + t);
         Snackbar.make(rootView, "Error", Snackbar.LENGTH_SHORT).show();
+        swipeLayout.setRefreshing(false);
     }
 }
