@@ -65,6 +65,10 @@ public class DataRetriever {
     @Nullable private Call<RssDocument> call;
 
     public void load() {
+        if (call != null) {
+            return;
+        }
+
         call = service.getData(uri.toString());
         call.enqueue(new Callback<RssDocument>() {
             @Override
