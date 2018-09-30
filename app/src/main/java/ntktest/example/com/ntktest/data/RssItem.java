@@ -39,7 +39,7 @@ public class RssItem {
     }
 
     @NonNull
-    public String pubDate() {
+    public String getPubDate() {
         return pubDate;
     }
 
