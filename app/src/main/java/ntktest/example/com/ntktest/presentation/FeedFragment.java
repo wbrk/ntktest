@@ -10,19 +10,19 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ntktest.example.com.ntktest.R;
-import ntktest.example.com.ntktest.data.DataRetriever;
-import ntktest.example.com.ntktest.data.RssDocument;
+import ntktest.example.com.ntktest.data.RssItem;
 
-public class FeedFragment extends Fragment {
+public class FeedFragment extends Fragment implements FeedView {
     private static final String TAG = "FeedFragment";
 
     @BindView(R.id.list)
@@ -36,7 +36,7 @@ public class FeedFragment extends Fragment {
 
     private Unbinder unbinder;
     private FeedAdapter adapter;
-    private DataRetriever retriever;
+    private FeedPresenter presenter;
 
     @Nullable
     @Override
@@ -51,14 +51,17 @@ public class FeedFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         adapter = new FeedAdapter();
-        adapter.setOnItemClickListener(this::onItemClick);
+        adapter.setOnItemClickListener(this::openDetails);
 
         recycler.setAdapter(adapter);
         recycler.setHasFixedSize(true);
         recycler.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
 
-        swipeLayout.setOnRefreshListener(retriever::load);
+        swipeLayout.setOnRefreshListener(presenter::requestData);
+        swipeLayout.setRefreshing(true);
+
+        presenter.requestData();
     }
 
     @Override
@@ -70,40 +73,30 @@ public class FeedFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        retriever = new DataRetriever.Builder()
-                .from(Uri.parse("https://meduza.io/rss/all/"))
-                .onSuccess(this::onLoad)
-                .onError(this::onError)
-                .build();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        retriever.load();
+        presenter = new FeedPresenter(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        retriever.cancel();
+        presenter.stop();
     }
 
-    private void onLoad(RssDocument document) {
-        adapter.setData(document.getItems());
+    @Override
+    public void showData(List<RssItem> data) {
+        adapter.setData(data);
         adapter.notifyDataSetChanged();
 
         swipeLayout.setRefreshing(false);
     }
 
-    private void onError(int code, Throwable t) {
-        Log.i(TAG, "onError: " + t);
+    @Override
+    public void showError() {
         Snackbar.make(rootView, "Error", Snackbar.LENGTH_SHORT).show();
         swipeLayout.setRefreshing(false);
     }
 
-    private void onItemClick(int position) {
+    private void openDetails(int position) {
         try {
             String url = adapter.getData().get(position).getLink();
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
