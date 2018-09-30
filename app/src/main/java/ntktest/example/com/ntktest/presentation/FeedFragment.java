@@ -14,16 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ntktest.example.com.ntktest.R;
 import ntktest.example.com.ntktest.data.DataRetriever;
 import ntktest.example.com.ntktest.data.RssDocument;
-import ntktest.example.com.ntktest.data.RssItem;
 
 public class FeedFragment extends Fragment {
     private static final String TAG = "FeedFragment";
@@ -38,10 +34,7 @@ public class FeedFragment extends Fragment {
     SwipeRefreshLayout swipeLayout;
 
     private Unbinder unbinder;
-
-    private RecyclerView.Adapter adapter;
-    private List<RssItem> data = new ArrayList<>();
-
+    private FeedAdapter adapter;
     private DataRetriever retriever;
 
     @Nullable
@@ -56,7 +49,7 @@ public class FeedFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        adapter = new FeedAdapter(data);
+        adapter = new FeedAdapter();
         recycler.setAdapter(adapter);
 
         recycler.setHasFixedSize(true);
@@ -96,7 +89,7 @@ public class FeedFragment extends Fragment {
     }
 
     private void onLoad(RssDocument document) {
-        data.addAll(document.getItems());
+        adapter.setData(document.getItems());
         adapter.notifyDataSetChanged();
 
         swipeLayout.setRefreshing(false);

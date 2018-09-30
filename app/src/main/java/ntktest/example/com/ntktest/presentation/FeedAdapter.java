@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -15,9 +16,6 @@ import ntktest.example.com.ntktest.R;
 import ntktest.example.com.ntktest.data.RssItem;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
-    @NonNull
-    private List<RssItem> data;
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.title)
         public TextView title;
@@ -34,9 +32,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
         }
     }
 
-    public FeedAdapter(@NonNull List<RssItem> data) {
-        this.data = data;
-    }
+    @NonNull
+    private List<RssItem> data = new ArrayList<>();
 
     @NonNull
     @Override
@@ -60,5 +57,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    @NonNull
+    public List<RssItem> getData() {
+        return data;
+    }
+
+    public void setData(@NonNull List<RssItem> data) {
+        this.data = data;
     }
 }
