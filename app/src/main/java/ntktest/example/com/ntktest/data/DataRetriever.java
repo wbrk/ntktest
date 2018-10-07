@@ -85,7 +85,9 @@ public class DataRetriever {
             @Override
             public void onFailure(Call<RssDocument> call, Throwable t) {
                 DataRetriever.this.call = null;
-                errorListener.onError(-1, t);
+                if (!call.isCanceled()) {
+                    errorListener.onError(-1, t);
+                }
             }
         });
     }
