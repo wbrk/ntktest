@@ -11,6 +11,9 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,6 +24,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ntktest.example.com.ntktest.R;
 import ntktest.example.com.ntktest.data.RssItem;
+import ntktest.example.com.ntktest.presentation.Router;
+import ntktest.example.com.ntktest.presentation.RouterHolder;
 
 public class FeedFragment extends Fragment implements FeedView {
     private static final String TAG = "FeedFragment";
@@ -74,6 +79,8 @@ public class FeedFragment extends Fragment implements FeedView {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new FeedPresenter(this);
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -81,6 +88,23 @@ public class FeedFragment extends Fragment implements FeedView {
         super.onStop();
         presenter.stop();
         swipeLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_feed, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.sources) {
+            Router router = RouterHolder.getRouter();
+            if (router != null) {
+                router.showSources();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
