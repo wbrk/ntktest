@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name" translatable="false">RSS Reader</string>
+    <string name="menu_sources">Sources</string>
 </resources>
