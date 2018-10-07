@@ -88,6 +88,7 @@ public class FeedFragment extends Fragment implements FeedView {
         super.onStop();
         presenter.stop();
         swipeLayout.setRefreshing(false);
+        // fixme re-request data if was stopped before data arrived
     }
 
     @Override
