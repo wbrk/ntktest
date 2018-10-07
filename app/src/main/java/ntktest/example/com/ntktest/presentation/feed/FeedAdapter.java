@@ -1,4 +1,4 @@
-package ntktest.example.com.ntktest.presentation;
+package ntktest.example.com.ntktest.presentation.feed;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
