@@ -41,7 +41,6 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder
         return new ViewHolder(v);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RssSource source = data.get(position);
