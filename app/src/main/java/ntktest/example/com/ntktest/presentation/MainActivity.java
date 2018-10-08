@@ -1,55 +1,36 @@
 package ntktest.example.com.ntktest.presentation;
 
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import ntktest.example.com.ntktest.R;
-import ntktest.example.com.ntktest.presentation.feed.FeedFragment;
-import ntktest.example.com.ntktest.presentation.source.SourceFragment;
 
-public class MainActivity extends AppCompatActivity implements Router {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-
-    private static final String TAG_FEED = "feed";
-    private static final String TAG_SOURCE = "source";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        FragmentManager fm = getSupportFragmentManager();
-        if (fm.findFragmentByTag(TAG_FEED) == null) {
-            fm.beginTransaction()
-                    .add(R.id.activity_root, new FeedFragment(), TAG_FEED)
-                    .commit();
-        }
+        NavigationUI.setupActionBarWithNavController(this, getNavController());
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        RouterHolder.setRouter(this);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        boolean rv = NavigationUI.onNavDestinationSelected(item, getNavController());
+        return rv || super.onOptionsItemSelected(item);
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        RouterHolder.setRouter(null);
+    public boolean onSupportNavigateUp() {
+        return getNavController().navigateUp();
     }
 
-    @Override
-    public void showSources() {
-        FragmentManager fm = getSupportFragmentManager();
-        SourceFragment source = (SourceFragment) fm.findFragmentByTag(TAG_SOURCE);
-        if (source == null) {
-            source = new SourceFragment();
-        }
-
-        fm.beginTransaction()
-                .replace(R.id.activity_root, source, TAG_SOURCE)
-                .addToBackStack(null)
-                .commit();
+    private NavController getNavController() {
+        return Navigation.findNavController(this, R.id.nav_host);
     }
 }
