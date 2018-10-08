@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -46,6 +47,13 @@ public class SourceListFragment extends Fragment implements SourceListView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         adapter = new SourceAdapter();
+        adapter.setOnItemClickListener((position) -> {
+            int id = adapter.getData().get(position).id;
+            SourceListFragmentDirections.ActionEditSource action
+                    = SourceListFragmentDirections.actionEditSource();
+            action.setSourceId(id);
+            NavHostFragment.findNavController(this).navigate(action);
+        });
 
         recycler.setAdapter(adapter);
         recycler.setHasFixedSize(true);
