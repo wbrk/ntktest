@@ -1,6 +1,7 @@
 package ntktest.example.com.ntktest.data;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
@@ -15,5 +16,11 @@ public class RssSource {
     @NonNull
     public String url = "";
 
-    // todo restrict modification of fields?
+    public RssSource() {}
+
+    @Ignore
+    public RssSource(@NonNull String name, @NonNull String url) {
+        this.name = name;
+        this.url = url;
+    }
 }
