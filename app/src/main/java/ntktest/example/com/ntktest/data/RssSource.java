@@ -14,4 +14,6 @@ public class RssSource {
 
     @NonNull
     public String url = "";
+
+    // todo restrict modification of fields?
 }

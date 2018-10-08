@@ -9,18 +9,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ntktest.example.com.ntktest.R;
+import ntktest.example.com.ntktest.data.RssSource;
 
-public class SourceFragment extends Fragment {
+public class SourceFragment extends Fragment implements SourceView {
     private static final String TAG = "SourceFragment";
 
     @BindView(R.id.list)
     RecyclerView recycler;
 
     private Unbinder unbinder;
+    private SourceAdapter adapter;
+    private SourcePresenter presenter;
 
     @Nullable
     @Override
@@ -33,8 +38,33 @@ public class SourceFragment extends Fragment {
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        adapter = new SourceAdapter();
+        recycler.setAdapter(adapter);
+        recycler.setHasFixedSize(true);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        presenter = new SourcePresenter(this);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.requestData();
+    }
+
+    @Override
+    public void showData(List<RssSource> data) {
+        adapter.setData(data);
+        adapter.notifyDataSetChanged();
     }
 }

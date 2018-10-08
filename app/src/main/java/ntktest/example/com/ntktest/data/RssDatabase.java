@@ -18,6 +18,7 @@ public abstract class RssDatabase extends RoomDatabase {
         if (instance == null) {
             instance = Room
                     .databaseBuilder(App.getAppContext(), RssDatabase.class, "db")
+                    .allowMainThreadQueries() // todo remove me
                     .build();
         }
         return instance;
