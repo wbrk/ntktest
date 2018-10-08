@@ -6,6 +6,6 @@
     <item
         android:id="@+id/sourceFragment"
         android:title="@string/sources_screen"
+        android:icon="@drawable/ic_rss_feed_white_24dp"
         app:showAsAction="ifRoom"/>
-    <!-- todo use icon for this item -->
 </menu>
