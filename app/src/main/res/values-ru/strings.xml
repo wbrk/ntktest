@@ -2,4 +2,7 @@
 <resources>
     <string name="feed_screen">Новости</string>
     <string name="sources_screen">Источники</string>
+    <string name="remove_source">Удалить</string>
+    <string name="edit_screen">Изменение источника</string>
+    <string name="new_screen">Новый источник</string>
 </resources>

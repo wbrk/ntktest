@@ -2,4 +2,7 @@
     <string name="app_name" translatable="false">RSS Reader</string>
     <string name="feed_screen">News</string>
     <string name="sources_screen">Sources</string>
+    <string name="remove_source">Remove</string>
+    <string name="edit_screen">Edit source</string>
+    <string name="new_screen">New source</string>
 </resources>
