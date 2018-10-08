@@ -1,4 +1,4 @@
-package ntktest.example.com.ntktest.presentation.source;
+package ntktest.example.com.ntktest.presentation.sourcelist;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
