@@ -1,6 +1,7 @@
 package ntktest.example.com.ntktest.presentation.feed;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import ntktest.example.com.ntktest.data.DataRetriever;
@@ -8,10 +9,10 @@ import ntktest.example.com.ntktest.data.DataRetriever;
 public class FeedPresenter {
     private static final String TAG = "FeedPresenter";
 
-    private DataRetriever retriever;
-    private FeedView view;
+    @NonNull private DataRetriever retriever;
+    @NonNull private FeedView view;
 
-    public FeedPresenter(FeedView view) {
+    public FeedPresenter(@NonNull FeedView view) {
         this.view = view;
         retriever = new DataRetriever.Builder()
                 .from(Uri.parse("https://meduza.io/rss/all/"))

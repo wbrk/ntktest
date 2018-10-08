@@ -94,7 +94,7 @@ public class FeedFragment extends Fragment implements FeedView {
     }
 
     @Override
-    public void showData(List<RssItem> data) {
+    public void showData(@NonNull List<RssItem> data) {
         adapter.setData(data);
         adapter.notifyDataSetChanged();
 
