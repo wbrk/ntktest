@@ -13,6 +13,9 @@ public interface RssSourceDao {
     @Query("SELECT * FROM RssSource")
     List<RssSource> all();
 
+    @Query("SELECT * FROM RssSource WHERE id = :id")
+    RssSource getById(int id);
+
     @Insert
     void insert(RssSource... sources);
 

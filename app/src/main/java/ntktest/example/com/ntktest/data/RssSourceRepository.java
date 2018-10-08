@@ -27,6 +27,11 @@ public class RssSourceRepository {
         return getSources(false);
     }
 
+    @NonNull
+    public RssSource getById(int id) {
+        return sourceDao.getById(id);
+    }
+
     public void add(@NonNull RssSource source) {
         sourceDao.insert(source);
         getSources(true);
