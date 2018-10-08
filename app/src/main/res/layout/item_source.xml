@@ -12,13 +12,18 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
     <TextView
         android:id="@+id/url"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/name"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"/>
+        android:textColor="@color/textSecondary"
+        android:maxLines="1"
+        android:ellipsize="end"/>
 
 </android.support.constraint.ConstraintLayout>
