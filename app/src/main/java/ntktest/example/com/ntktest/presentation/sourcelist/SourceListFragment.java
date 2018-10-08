@@ -18,22 +18,22 @@ import butterknife.Unbinder;
 import ntktest.example.com.ntktest.R;
 import ntktest.example.com.ntktest.data.RssSource;
 
-public class SourceFragment extends Fragment implements SourceView {
-    private static final String TAG = "SourceFragment";
+public class SourceListFragment extends Fragment implements SourceListView {
+    private static final String TAG = "SourceListFragment";
 
     @BindView(R.id.list)
     RecyclerView recycler;
 
     private Unbinder unbinder;
     private SourceAdapter adapter;
-    private SourcePresenter presenter;
+    private SourceListPresenter presenter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_source, container, false);
+        View v = inflater.inflate(R.layout.fragment_source_list, container, false);
         unbinder = ButterKnife.bind(this, v);
         return v;
     }
@@ -57,7 +57,7 @@ public class SourceFragment extends Fragment implements SourceView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new SourcePresenter(this);
+        presenter = new SourceListPresenter(this);
     }
 
     @Override

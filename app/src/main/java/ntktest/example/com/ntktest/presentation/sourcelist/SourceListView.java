@@ -4,6 +4,6 @@ import java.util.List;
 
 import ntktest.example.com.ntktest.data.RssSource;
 
-public interface SourceView {
+public interface SourceListView {
     void showData(List<RssSource> data);
 }

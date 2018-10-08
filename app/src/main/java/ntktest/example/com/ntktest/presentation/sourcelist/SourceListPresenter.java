@@ -7,10 +7,10 @@ import java.util.List;
 import ntktest.example.com.ntktest.data.RssSource;
 import ntktest.example.com.ntktest.data.RssSourceRepository;
 
-public class SourcePresenter {
-    @NonNull private SourceView view;
+public class SourceListPresenter {
+    @NonNull private SourceListView view;
 
-    public SourcePresenter(@NonNull SourceView view) {
+    public SourceListPresenter(@NonNull SourceListView view) {
         this.view = view;
     }
 

@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/sourceFragment"
-        android:name="ntktest.example.com.ntktest.presentation.sourcelist.SourceFragment"
+        android:name="ntktest.example.com.ntktest.presentation.sourcelist.SourceListFragment"
         android:label="@string/sources_screen"
-        tools:layout="@layout/fragment_source" />
+        tools:layout="@layout/fragment_source_list" />
 </navigation>
