@@ -11,13 +11,28 @@
         android:label="@string/feed_screen"
         tools:layout="@layout/fragment_feed" >
         <action
-            android:id="@+id/action_feedFragment_to_sourceFragment"
+            android:id="@+id/actionShowSourceList"
+            app:destination="@id/sourceListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sourceListFragment"
+        android:name="ntktest.example.com.ntktest.presentation.sourcelist.SourceListFragment"
+        android:label="@string/sources_screen"
+        tools:layout="@layout/fragment_source_list" >
+        <action
+            android:id="@+id/actionEditSource"
             app:destination="@id/sourceFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/sourceFragment"
-        android:name="ntktest.example.com.ntktest.presentation.sourcelist.SourceListFragment"
-        android:label="@string/sources_screen"
-        tools:layout="@layout/fragment_source_list" />
+        android:name="ntktest.example.com.ntktest.presentation.source.SourceFragment"
+        android:label="fragment_source"
+        tools:layout="@layout/fragment_source" >
+        <argument
+            android:name="sourceId"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
 </navigation>

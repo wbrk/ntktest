@@ -3,6 +3,7 @@ package ntktest.example.com.ntktest.presentation.sourcelist;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
+import androidx.navigation.Navigation;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -23,6 +25,9 @@ public class SourceListFragment extends Fragment implements SourceListView {
 
     @BindView(R.id.list)
     RecyclerView recycler;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     private Unbinder unbinder;
     private SourceAdapter adapter;
@@ -46,6 +51,10 @@ public class SourceListFragment extends Fragment implements SourceListView {
         recycler.setHasFixedSize(true);
         recycler.addItemDecoration(new DividerItemDecoration(getContext(),
                 DividerItemDecoration.VERTICAL));
+
+        fab.setOnClickListener((v) -> {
+            Navigation.findNavController(v).navigate(R.id.actionEditSource);
+        });
     }
 
     @Override
