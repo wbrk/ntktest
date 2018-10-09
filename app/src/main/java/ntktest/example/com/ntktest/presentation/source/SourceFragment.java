@@ -92,6 +92,7 @@ public class SourceFragment extends Fragment implements SourceView {
             newSource = false;
         } else {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.new_screen);
+            // fixme: kind of a hack
         }
     }
 
@@ -105,7 +106,8 @@ public class SourceFragment extends Fragment implements SourceView {
         if (item.getItemId() == R.id.remove) {
             presenter.delete(source);
             NavHostFragment.findNavController(this).popBackStack();
+            return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }
