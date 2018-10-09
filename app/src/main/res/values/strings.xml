@@ -5,4 +5,6 @@
     <string name="remove_source">Remove</string>
     <string name="edit_screen">Edit source</string>
     <string name="new_screen">New source</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_url">Link</string>
 </resources>

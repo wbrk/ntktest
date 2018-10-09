@@ -5,4 +5,6 @@
     <string name="remove_source">Удалить</string>
     <string name="edit_screen">Изменение источника</string>
     <string name="new_screen">Новый источник</string>
+    <string name="hint_name">Название</string>
+    <string name="hint_url">Ссылка</string>
 </resources>
