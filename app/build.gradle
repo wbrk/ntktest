@@ -5,7 +5,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId "ntktest.example.com.ntktest"
+        applicationId "com.example.rssreader"
         minSdkVersion 19
         targetSdkVersion 28
 

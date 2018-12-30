@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/feedFragment"
-        android:name="ntktest.example.com.ntktest.presentation.feed.FeedFragment"
+        android:name="com.example.rssreader.presentation.feed.FeedFragment"
         android:label="@string/feed_screen"
         tools:layout="@layout/fragment_feed" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/sourceListFragment"
-        android:name="ntktest.example.com.ntktest.presentation.sourcelist.SourceListFragment"
+        android:name="com.example.rssreader.presentation.sourcelist.SourceListFragment"
         android:label="@string/sources_screen"
         tools:layout="@layout/fragment_source_list" >
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/sourceFragment"
-        android:name="ntktest.example.com.ntktest.presentation.source.SourceFragment"
+        android:name="com.example.rssreader.presentation.source.SourceFragment"
         android:label="@string/edit_screen"
         tools:layout="@layout/fragment_source" >
         <argument
