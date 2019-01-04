@@ -9,7 +9,7 @@ public class RssSourceRepository {
     private static RssSourceRepository instance;
 
     @NonNull
-    private RssSourceDao sourceDao = RssDatabase.instance().sourceDao();
+    private RssSourceDao sourceDao = RssDatabase.getInstance().sourceDao();
 
     @Nullable
     private List<RssSource> cache;
