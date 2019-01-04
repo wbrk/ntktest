@@ -9,24 +9,27 @@ public class SourcePresenter {
     @NonNull
     private SourceView view;
 
+    @NonNull
+    private RssSourceRepository sourceRepo = new RssSourceRepository();
+
     public SourcePresenter(@NonNull SourceView view) {
         this.view = view;
     }
 
     @NonNull
     public RssSource getById(int id) {
-        return RssSourceRepository.instance().getById(id);
+        return sourceRepo.getById(id);
     }
 
     public void add(@NonNull RssSource source) {
-        RssSourceRepository.instance().add(source);
+        sourceRepo.add(source);
     }
 
     public void update(@NonNull RssSource source) {
-        RssSourceRepository.instance().update(source);
+        sourceRepo.update(source);
     }
 
     public void delete(@NonNull RssSource source) {
-        RssSourceRepository.instance().delete(source);
+        sourceRepo.delete(source);
     }
 }

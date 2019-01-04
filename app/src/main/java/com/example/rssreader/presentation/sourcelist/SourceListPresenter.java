@@ -10,13 +10,14 @@ import java.util.List;
 
 public class SourceListPresenter {
     @NonNull private SourceListView view;
+    @NonNull private RssSourceRepository sourceRepo = new RssSourceRepository();
 
     public SourceListPresenter(@NonNull SourceListView view) {
         this.view = view;
     }
 
     public void requestData() {
-        List<RssSource> data = RssSourceRepository.instance().getSources();
+        List<RssSource> data = sourceRepo.getSources();
         view.showData(data);
     }
 }
