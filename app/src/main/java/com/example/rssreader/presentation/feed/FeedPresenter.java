@@ -6,6 +6,8 @@ import android.util.Log;
 
 import com.example.rssreader.data.DataRetriever;
 
+import kotlin.Unit;
+
 public class FeedPresenter {
     private static final String TAG = "FeedPresenter";
 
@@ -14,15 +16,18 @@ public class FeedPresenter {
 
     public FeedPresenter(@NonNull FeedView view) {
         this.view = view;
-        retriever = new DataRetriever.Builder()
-                .from(Uri.parse("https://meduza.io/rss/all/"))
-                .onSuccess(view::showData)
-                .onError((code, t) -> {
+        retriever = new DataRetriever(Uri.parse("https://meduza.io/rss/all/"),
+                (data) -> {
+                    view.showData(data);
+                    return Unit.INSTANCE;
+                },
+                (code, t) -> {
                     Log.i(TAG, "onError: code: " + code);
                     Log.i(TAG, "onError: error: " + t);
                     view.showError();
-                })
-                .build();
+
+                    return Unit.INSTANCE;
+                }) ;
     }
 
     public void requestData() {
