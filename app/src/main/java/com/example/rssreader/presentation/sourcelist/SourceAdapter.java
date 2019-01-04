@@ -62,8 +62,8 @@ public class SourceAdapter extends RecyclerView.Adapter<SourceAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         RssSource source = data.get(position);
-        holder.name.setText(source.name);
-        holder.url.setText(source.url);
+        holder.name.setText(source.getName());
+        holder.url.setText(source.getUrl());
     }
 
     @Override

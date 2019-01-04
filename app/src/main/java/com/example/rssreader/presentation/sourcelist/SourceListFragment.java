@@ -49,7 +49,7 @@ public class SourceListFragment extends Fragment implements SourceListView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         adapter = new SourceAdapter();
         adapter.setOnItemClickListener((position) -> {
-            int id = adapter.getData().get(position).id;
+            int id = adapter.getData().get(position).getId();
             SourceListFragmentDirections.ActionEditSource action
                     = SourceListFragmentDirections.actionEditSource();
             action.setSourceId(id);

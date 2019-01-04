@@ -42,7 +42,7 @@ public class SourceFragment extends Fragment implements SourceView {
     private SourcePresenter presenter;
     private boolean newSource = true;
 
-    @NonNull private RssSource source = new RssSource();
+    @NonNull private RssSource source = new RssSource(0, "", "");
 
     @Nullable
     @Override
@@ -55,14 +55,15 @@ public class SourceFragment extends Fragment implements SourceView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         if (!newSource) {
-            name.setText(source.name);
-            url.setText(source.url);
+            name.setText(source.getName());
+            url.setText(source.getUrl());
         }
 
         fab.setOnClickListener((v) -> {
             // todo validate
-            source.name = name.getText().toString();
-            source.url = url.getText().toString();
+            String srcName = name.getText().toString();
+            String srcUrl = url.getText().toString();
+            source = source.copy(source.getId(), srcName, srcUrl);
 
             if (newSource) {
                 presenter.add(source);
