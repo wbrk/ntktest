@@ -5,9 +5,7 @@ import android.content.Context
 
 class App : Application() {
     companion object {
-        // todo remove JvmStatic
         // todo use DI?
-        @JvmStatic
         lateinit var appContext: Context
         private set
     }
