@@ -1,6 +1,6 @@
 package com.example.rssreader.data
 
-import android.arch.persistence.room.*
+import androidx.room.*
 
 @Dao
 interface RssSourceDao {

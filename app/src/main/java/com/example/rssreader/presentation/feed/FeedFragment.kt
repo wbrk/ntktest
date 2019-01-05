@@ -3,9 +3,9 @@ package com.example.rssreader.presentation.feed
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.*
 import com.example.rssreader.R
 import com.example.rssreader.data.RssItem

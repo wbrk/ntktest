@@ -1,8 +1,8 @@
 package com.example.rssreader.presentation.sourcelist
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
