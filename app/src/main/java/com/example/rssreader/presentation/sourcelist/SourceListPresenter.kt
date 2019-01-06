@@ -18,6 +18,7 @@ class SourceListPresenter(private val view: SourceListView) {
     }
 
     fun stop() {
+        // todo not sure if it's ok to do it this way
         disposables.clear()
     }
 }
