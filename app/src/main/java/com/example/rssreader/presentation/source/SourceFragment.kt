@@ -10,12 +10,12 @@ import com.example.rssreader.R
 import com.example.rssreader.data.RssSource
 import kotlinx.android.synthetic.main.fragment_source.*
 
-class SourceFragment : Fragment() {
+class SourceFragment : Fragment(), SourceView {
     companion object {
         private const val NEW_SOURCE = -1
     }
 
-    private val presenter = SourcePresenter()
+    private lateinit var presenter: SourcePresenter
     private var newSource = true
     private var source = RssSource(0, "", "")
 
@@ -23,18 +23,28 @@ class SourceFragment : Fragment() {
         inflater.inflate(R.layout.fragment_source, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (!newSource) {
-            name.setText(source.name)
-            url.setText(source.url)
+        presenter = SourcePresenter(this)
+
+        // todo move this logic out of fragment
+        val id = SourceFragmentArgs.fromBundle(arguments!!).sourceId
+        if (id != NEW_SOURCE) {
+            presenter.getById(id)
+            setHasOptionsMenu(true)
+            newSource = false
+        } else {
+            (activity as AppCompatActivity).supportActionBar!!.setTitle(R.string.new_screen)
+            // fixme: kind of a hack
         }
 
         fab.setOnClickListener { view ->
             // todo validate
+            // todo move this logic out of fragment
             source = source.copy(
                 name = name.text.toString(),
                 url = url.text.toString()
             )
 
+            // todo move this logic out of fragment
             if (newSource) {
                 presenter.add(source)
             } else {
@@ -46,17 +56,9 @@ class SourceFragment : Fragment() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val id = SourceFragmentArgs.fromBundle(arguments!!).sourceId
-        if (id != NEW_SOURCE) {
-            source = presenter.getById(id)
-            setHasOptionsMenu(true)
-            newSource = false
-        } else {
-            (activity as AppCompatActivity).supportActionBar!!.setTitle(R.string.new_screen)
-            // fixme: kind of a hack
-        }
+    override fun onStop() {
+        super.onStop()
+        presenter.stop()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) =
@@ -70,5 +72,12 @@ class SourceFragment : Fragment() {
         }
 
         else -> super.onOptionsItemSelected(item)
+    }
+
+    override fun showData(source: RssSource) {
+        this.source = source
+
+        name.setText(source.name)
+        url.setText(source.url)
     }
 }

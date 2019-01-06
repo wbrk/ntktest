@@ -11,7 +11,6 @@ abstract class RssDatabase : RoomDatabase() {
         // todo remove instantiation (use DI)
         val instance: RssDatabase by lazy {
             Room.databaseBuilder(App.appContext, RssDatabase::class.java, "db")
-                .allowMainThreadQueries() // todo remove me
                 .build()
         }
     }

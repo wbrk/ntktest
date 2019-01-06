@@ -41,6 +41,11 @@ class SourceListFragment : Fragment(), SourceListView {
         presenter = SourceListPresenter(this)
     }
 
+    override fun onStop() {
+        super.onStop()
+        presenter.stop()
+    }
+
     override fun onResume() {
         super.onResume()
         presenter.requestData()
