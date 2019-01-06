@@ -5,7 +5,7 @@ import com.example.rssreader.di.RssServiceFactory
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class DataRetriever(private val uri: Uri) {
+class RssItemRepository(private val uri: Uri) {
     private val service: RssService = RssServiceFactory.service
 
     fun load(): Single<List<RssItem>> =

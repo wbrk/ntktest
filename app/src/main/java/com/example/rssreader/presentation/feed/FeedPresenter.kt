@@ -3,7 +3,7 @@ package com.example.rssreader.presentation.feed
 import android.net.Uri
 import android.util.Log
 import com.example.rssreader.addTo
-import com.example.rssreader.data.DataRetriever
+import com.example.rssreader.data.RssItemRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
@@ -12,7 +12,7 @@ class FeedPresenter(private val view: FeedView) {
         private const val TAG = "FeedPresenter"
     }
 
-    private val retriever = DataRetriever(Uri.parse("https://meduza.io/rss/all/"))
+    private val retriever = RssItemRepository(Uri.parse("https://meduza.io/rss/all/"))
     private val disposables = CompositeDisposable()
 
     private fun onError(t: Throwable) {
