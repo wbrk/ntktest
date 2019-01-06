@@ -5,11 +5,10 @@ import com.example.rssreader.di.RssServiceFactory
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class RssItemRepository(private val uri: Uri) {
-    private val service: RssService = RssServiceFactory.service
-
-    fun load(): Single<List<RssItem>> =
-        service.getData(uri.toString())
+class RssItemRepository {
+    fun loadAllFrom(uri: Uri): Single<List<RssItem>> =
+        RssServiceFactory.service
+            .getData(uri.toString())
             .subscribeOn(Schedulers.io())
             .map { it.items }
 }

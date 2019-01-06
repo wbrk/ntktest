@@ -12,7 +12,7 @@ class FeedPresenter(private val view: FeedView) {
         private const val TAG = "FeedPresenter"
     }
 
-    private val retriever = RssItemRepository(Uri.parse("https://meduza.io/rss/all/"))
+    private val retriever = RssItemRepository()
     private val disposables = CompositeDisposable()
 
     private fun onError(t: Throwable) {
@@ -21,7 +21,7 @@ class FeedPresenter(private val view: FeedView) {
     }
 
     fun requestData() {
-        retriever.load()
+        retriever.loadAllFrom(Uri.parse("https://meduza.io/rss/all/"))
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(view::showData, this::onError)
             .addTo(disposables)
