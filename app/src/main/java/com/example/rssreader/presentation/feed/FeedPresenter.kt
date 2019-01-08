@@ -16,7 +16,7 @@ class FeedPresenter(private val view: FeedView) {
     private val disposables = CompositeDisposable()
 
     private fun onError(t: Throwable) {
-        Log.i(TAG, "onError: error: $t")
+        Log.i(TAG, "onError: error: $t", t)
         view.showError()
     }
 

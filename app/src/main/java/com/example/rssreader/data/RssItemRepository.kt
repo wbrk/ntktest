@@ -11,4 +11,12 @@ class RssItemRepository {
             .getData(uri.toString())
             .subscribeOn(Schedulers.io())
             .map { it.items }
+            .flattenAsObservable { list -> list }
+            .filter(::allFieldsSet)
+            .map(RssItemConverter::convert)
+            .toList()
+
+    private fun allFieldsSet(item: RssItemModel): Boolean = with(item) {
+        !title.isNullOrEmpty() && !link.isNullOrEmpty() && !pubDate.isNullOrEmpty()
+    }
 }
