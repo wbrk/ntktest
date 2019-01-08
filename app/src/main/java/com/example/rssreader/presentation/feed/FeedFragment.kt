@@ -4,21 +4,20 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.*
+import com.example.rssreader.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.data.RssItem
 import kotlinx.android.synthetic.main.fragment_feed.*
 import java.lang.Exception
 
-class FeedFragment : Fragment(), FeedView {
+class FeedFragment : BaseFragment(), FeedView {
 
     private val adapter = FeedAdapter()
     private lateinit var presenter: FeedPresenter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_feed, container, false)
+    override val layout: Int = R.layout.fragment_feed
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter.onItemClickListener = this::openDetails

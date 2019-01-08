@@ -1,16 +1,17 @@
 package com.example.rssreader.presentation.source
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import android.view.*
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import com.example.rssreader.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.data.RssSource
 import kotlinx.android.synthetic.main.fragment_source.*
 
-class SourceFragment : Fragment(), SourceView {
+// todo break project into modules by feature?
+class SourceFragment : BaseFragment(), SourceView {
     companion object {
         private const val NEW_SOURCE = -1
     }
@@ -19,8 +20,7 @@ class SourceFragment : Fragment(), SourceView {
     private var newSource = true
     private var source = RssSource(0, "", "")
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_source, container, false)
+    override val layout: Int = R.layout.fragment_source
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = SourcePresenter(this)

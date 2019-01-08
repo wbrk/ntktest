@@ -1,24 +1,21 @@
 package com.example.rssreader.presentation.sourcelist
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
+import com.example.rssreader.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.data.RssSource
 import kotlinx.android.synthetic.main.fragment_source_list.*
 
-class SourceListFragment : Fragment(), SourceListView {
+class SourceListFragment : BaseFragment(), SourceListView {
 
     private val adapter = SourceAdapter()
     private lateinit var presenter: SourceListPresenter
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_source_list, container, false)
+    override val layout: Int = R.layout.fragment_source_list
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         adapter.onItemClickListener = { position ->
