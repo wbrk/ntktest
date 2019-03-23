@@ -11,4 +11,14 @@ abstract class BaseFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(layout, container, false)
+
+    override fun onStop() {
+        super.onStop()
+        hideKeyboard()
+    }
+
+    private fun hideKeyboard() {
+        val v = view?.rootView ?: return
+        requireActivity().hideKeyboard(v)
+    }
 }

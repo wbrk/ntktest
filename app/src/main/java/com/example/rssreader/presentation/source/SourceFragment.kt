@@ -33,7 +33,7 @@ class SourceFragment : BaseFragment(), SourceView {
             newSource = false
         } else {
             (activity as AppCompatActivity).supportActionBar!!.setTitle(R.string.new_screen)
-            // fixme: kind of a hack
+            // fixme: kind of a hack (use toolbar)
         }
 
         fab.setOnClickListener { view ->
@@ -52,7 +52,6 @@ class SourceFragment : BaseFragment(), SourceView {
             }
 
             Navigation.findNavController(view).popBackStack()
-            // todo something bad happens to keyboard
         }
     }
 
