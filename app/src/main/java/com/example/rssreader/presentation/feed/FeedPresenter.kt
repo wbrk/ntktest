@@ -4,19 +4,16 @@ import android.net.Uri
 import android.util.Log
 import com.example.rssreader.addTo
 import com.example.rssreader.data.RssItemRepository
+import com.example.rssreader.logInfo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
 class FeedPresenter(private val view: FeedView) {
-    companion object {
-        private const val TAG = "FeedPresenter"
-    }
-
     private val itemRepository = RssItemRepository()
     private val disposables = CompositeDisposable()
 
     private fun onError(t: Throwable) {
-        Log.i(TAG, "onError: error: $t", t)
+        logInfo("onError: error: $t", t)
         view.showError()
     }
 
