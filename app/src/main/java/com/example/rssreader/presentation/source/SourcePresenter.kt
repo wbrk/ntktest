@@ -1,15 +1,13 @@
 package com.example.rssreader.presentation.source
 
-import com.example.rssreader.addTo
 import com.example.rssreader.domain.entity.RssSource
 import com.example.rssreader.data.repository.RssSourceRepository
 import com.example.rssreader.di.RssDatabaseFactory
+import com.example.rssreader.presentation.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 
-class SourcePresenter(private val view: SourceView) {
+class SourcePresenter(private val view: SourceView) : BasePresenter() {
     private val sourceRepo = RssSourceRepository(RssDatabaseFactory.db.sourceDao())
-    private val disposables = CompositeDisposable()
 
     // todo i think, control flow must be different
     // like fragment tells presenter it's ready
@@ -18,31 +16,27 @@ class SourcePresenter(private val view: SourceView) {
         sourceRepo.getById(id)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(view::showData)
-            .addTo(disposables)
+            .clearOnDestroy()
     }
 
     fun add(source: RssSource) {
         sourceRepo.add(source)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
-            .addTo(disposables)
+            .clearOnDestroy()
     }
 
     fun update(source: RssSource) {
         sourceRepo.update(source)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
-            .addTo(disposables)
+            .clearOnDestroy()
     }
 
     fun delete(source: RssSource) {
         sourceRepo.delete(source)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
-            .addTo(disposables)
-    }
-
-    fun stop() {
-        disposables.clear()
+            .clearOnDestroy()
     }
 }
