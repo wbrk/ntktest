@@ -1,4 +1,4 @@
-package com.example.rssreader.data
+package com.example.rssreader.domain.entity
 
 data class RssItem(
     val title: String,

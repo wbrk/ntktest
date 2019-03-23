@@ -1,6 +1,7 @@
-package com.example.rssreader.data
+package com.example.rssreader.data.repository
 
-import com.example.rssreader.di.RssDatabaseFactory
+import com.example.rssreader.domain.entity.RssSource
+import com.example.rssreader.data.db.RssSourceDao
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single

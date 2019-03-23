@@ -7,7 +7,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.example.rssreader.BaseFragment
 import com.example.rssreader.R
-import com.example.rssreader.data.RssSource
+import com.example.rssreader.domain.entity.RssSource
 import kotlinx.android.synthetic.main.fragment_source_list.*
 
 class SourceListFragment : BaseFragment(), SourceListView {

@@ -2,7 +2,7 @@ package com.example.rssreader.presentation.feed
 
 import android.net.Uri
 import com.example.rssreader.addTo
-import com.example.rssreader.data.RssItemRepository
+import com.example.rssreader.data.repository.RssItemRepository
 import com.example.rssreader.di.RssServiceFactory
 import com.example.rssreader.logInfo
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -1,7 +1,7 @@
 package com.example.rssreader.presentation.sourcelist
 
 import com.example.rssreader.addTo
-import com.example.rssreader.data.RssSourceRepository
+import com.example.rssreader.data.repository.RssSourceRepository
 import com.example.rssreader.di.RssDatabaseFactory
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

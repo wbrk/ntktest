@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.rssreader.R
-import com.example.rssreader.data.RssItem
+import com.example.rssreader.domain.entity.RssItem
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_feed.*
 

@@ -1,6 +1,7 @@
-package com.example.rssreader.data
+package com.example.rssreader.data.db
 
 import androidx.room.*
+import com.example.rssreader.domain.entity.RssSource
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single

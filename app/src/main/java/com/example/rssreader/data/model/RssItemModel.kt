@@ -1,4 +1,4 @@
-package com.example.rssreader.data
+package com.example.rssreader.data.model
 
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root

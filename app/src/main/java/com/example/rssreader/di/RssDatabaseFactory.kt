@@ -2,7 +2,7 @@ package com.example.rssreader.di
 
 import androidx.room.Room
 import com.example.rssreader.App
-import com.example.rssreader.data.RssDatabase
+import com.example.rssreader.data.db.RssDatabase
 
 object RssDatabaseFactory {
     val db: RssDatabase by lazy {

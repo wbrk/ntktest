@@ -1,7 +1,10 @@
-package com.example.rssreader.data
+package com.example.rssreader.data.repository
 
 import android.net.Uri
-import com.example.rssreader.di.RssServiceFactory
+import com.example.rssreader.data.RssItemConverter
+import com.example.rssreader.data.model.RssItemModel
+import com.example.rssreader.data.service.RssService
+import com.example.rssreader.domain.entity.RssItem
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
