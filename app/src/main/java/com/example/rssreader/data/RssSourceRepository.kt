@@ -6,9 +6,7 @@ import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class RssSourceRepository {
-    private val sourceDao = RssDatabaseFactory.db.sourceDao()
-
+class RssSourceRepository(private val sourceDao: RssSourceDao) {
     fun getSources(): Single<List<RssSource>> =
         sourceDao.all()
             .subscribeOn(Schedulers.io())

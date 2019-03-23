@@ -1,15 +1,15 @@
 package com.example.rssreader.presentation.feed
 
 import android.net.Uri
-import android.util.Log
 import com.example.rssreader.addTo
 import com.example.rssreader.data.RssItemRepository
+import com.example.rssreader.di.RssServiceFactory
 import com.example.rssreader.logInfo
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 
 class FeedPresenter(private val view: FeedView) {
-    private val itemRepository = RssItemRepository()
+    private val itemRepository = RssItemRepository(RssServiceFactory.service)
     private val disposables = CompositeDisposable()
 
     private fun onError(t: Throwable) {
