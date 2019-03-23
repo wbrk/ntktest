@@ -48,29 +48,26 @@ androidExtensions {
 // todo kotlin dsl?
 
 dependencies {
-    def nav_version = "1.0.0-alpha09"
-    def room_version = "2.1.0-alpha03"
+    def nav_version = "1.0.0"
+    def room_version = "2.1.0-alpha06"
     def retrofit_version = "2.4.0"
-    def butterknife_version = "8.8.1"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
-    implementation "androidx.appcompat:appcompat:1.1.0-alpha01"
-    implementation "androidx.fragment:fragment:1.1.0-alpha03"
-    implementation "androidx.recyclerview:recyclerview:1.1.0-alpha01"
-    implementation "com.google.android.material:material:1.1.0-alpha02"
+    implementation "androidx.appcompat:appcompat:1.1.0-alpha03"
+    implementation "androidx.fragment:fragment:1.1.0-alpha05"
+    implementation "androidx.recyclerview:recyclerview:1.1.0-alpha03"
+    implementation "com.google.android.material:material:1.1.0-alpha04"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-simplexml:$retrofit_version"
 
-    implementation "io.reactivex.rxjava2:rxjava:2.2.5"
-    implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
-
-    // todo remove?
-    implementation "com.jakewharton:butterknife:$butterknife_version"
-    kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
+    implementation "io.reactivex.rxjava2:rxjava:2.2.7"
+    implementation "io.reactivex.rxjava2:rxkotlin:2.3.0"
+    implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
+    // todo timber
 
     implementation "androidx.room:room-rxjava2:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
