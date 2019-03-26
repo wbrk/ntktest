@@ -1,36 +1,24 @@
 package com.example.rssreader.presentation.feed
 
-import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.rssreader.R
 import com.example.rssreader.domain.entity.RssItem
+import com.example.rssreader.presentation.BaseAdapter
+import com.example.rssreader.presentation.BaseViewHolder
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_feed.*
 
-class FeedAdapter : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+class FeedAdapter : BaseAdapter<FeedAdapter.ViewHolder>() {
 
-    inner class ViewHolder(override val containerView: View)
-        : RecyclerView.ViewHolder(containerView), LayoutContainer {
+    inner class ViewHolder(override val containerView: View, clickListener: (Int) -> Unit)
+        : BaseViewHolder(containerView, clickListener), LayoutContainer
 
-        init {
-            containerView.setOnClickListener {
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    onItemClickListener(adapterPosition)
-                }
-            }
-        }
-    }
-
-    var onItemClickListener: (position: Int) -> Unit = {}
     var data: List<RssItem> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.item_feed, parent, false)
-        return ViewHolder(view)
+        val view = inflate(R.layout.item_feed, parent)
+        return ViewHolder(view, onItemClickListener)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
