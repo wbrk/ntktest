@@ -3,8 +3,9 @@ package com.example.rssreader.presentation.source
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.*
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.rssreader.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.domain.entity.RssSource
@@ -20,13 +21,15 @@ class SourceFragment : BaseFragment(), SourceView {
     private var newSource = true
     private var source = RssSource(0, "", "")
 
+    private val args: SourceFragmentArgs by navArgs()
+
     override val layout: Int = R.layout.fragment_source
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = SourcePresenter(this)
 
         // todo move this logic out of fragment
-        val id = SourceFragmentArgs.fromBundle(arguments!!).sourceId
+        val id = args.sourceId
         if (id != NEW_SOURCE) {
             presenter.getById(id)
             setHasOptionsMenu(true)
@@ -51,7 +54,7 @@ class SourceFragment : BaseFragment(), SourceView {
                 presenter.update(source)
             }
 
-            Navigation.findNavController(view).popBackStack()
+            view.findNavController().popBackStack()
         }
     }
 
@@ -66,7 +69,7 @@ class SourceFragment : BaseFragment(), SourceView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.remove -> {
             presenter.delete(source)
-            NavHostFragment.findNavController(this).popBackStack()
+            findNavController().popBackStack()
             true
         }
 

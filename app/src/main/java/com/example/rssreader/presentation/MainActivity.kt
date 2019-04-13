@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.rssreader.R
 
@@ -25,5 +25,5 @@ class MainActivity : AppCompatActivity() {
         navController.navigateUp()
 
     private val navController: NavController
-        get() = Navigation.findNavController(this, R.id.nav_host)
+        get() = findNavController(R.id.nav_host)
 }

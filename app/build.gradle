@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
-apply plugin: 'androidx.navigation.safeargs'
-
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
     compileSdkVersion 28
@@ -48,17 +48,17 @@ androidExtensions {
 // todo kotlin dsl?
 
 dependencies {
-    def nav_version = "1.0.0"
+    def nav_version = "2.1.0-alpha02"
     def room_version = "2.1.0-alpha06"
     def retrofit_version = "2.4.0"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha3"
-    implementation "androidx.appcompat:appcompat:1.1.0-alpha03"
-    implementation "androidx.fragment:fragment:1.1.0-alpha05"
-    implementation "androidx.recyclerview:recyclerview:1.1.0-alpha03"
-    implementation "com.google.android.material:material:1.1.0-alpha04"
+    implementation "androidx.constraintlayout:constraintlayout:2.0.0-alpha4"
+    implementation "androidx.appcompat:appcompat:1.1.0-alpha04"
+    implementation "androidx.fragment:fragment:1.1.0-alpha06"
+    implementation "androidx.recyclerview:recyclerview:1.1.0-alpha04"
+    implementation "com.google.android.material:material:1.1.0-alpha05"
 
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
@@ -75,8 +75,10 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     testImplementation "androidx.room:room-testing:$room_version"
 
-    implementation "android.arch.navigation:navigation-fragment:$nav_version"
-    implementation "android.arch.navigation:navigation-ui:$nav_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    implementation "androidx.core:core-ktx:1.0.1"
 
     testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test:runner:1.1.1"
