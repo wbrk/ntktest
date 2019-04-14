@@ -30,6 +30,8 @@ class FeedFragment : BaseFragment(), FeedView {
         swipeLayout.isRefreshing = true
 
         presenter.requestData()
+
+        setTitle(R.string.feed_screen)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

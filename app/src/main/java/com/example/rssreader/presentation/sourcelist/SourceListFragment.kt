@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.View
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.example.rssreader.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.domain.entity.RssSource
@@ -21,7 +20,7 @@ class SourceListFragment : BaseFragment(), SourceListView {
         adapter.onItemClickListener = { position ->
             val sourceId = adapter.data[position].id
             val action = SourceListFragmentDirections.actionEditSource(sourceId)
-            findNavController().navigate(action)
+            navController.navigate(action)
         }
 
         list.adapter = adapter
@@ -31,6 +30,9 @@ class SourceListFragment : BaseFragment(), SourceListView {
         fab.setOnClickListener { v ->
             v.findNavController().navigate(R.id.actionEditSource)
         }
+
+        setTitle(R.string.sources_screen)
+        setNavigationIcon(R.drawable.ic_arrow_back_24dp)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

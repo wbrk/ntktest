@@ -1,10 +1,8 @@
 package com.example.rssreader.presentation.source
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.*
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.rssreader.BaseFragment
 import com.example.rssreader.R
@@ -28,15 +26,16 @@ class SourceFragment : BaseFragment(), SourceView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         presenter = SourcePresenter(this)
 
+        setNavigationIcon(R.drawable.ic_arrow_back_24dp)
+
         // todo move this logic out of fragment
         val id = args.sourceId
         if (id != NEW_SOURCE) {
-            presenter.getById(id)
+            presenter.getById(id) // todo fix title flickering due to db load pause (use progressbar)
             setHasOptionsMenu(true)
             newSource = false
         } else {
-            (activity as AppCompatActivity).supportActionBar!!.setTitle(R.string.new_screen)
-            // fixme: kind of a hack (use toolbar)
+            setTitle(R.string.new_screen)
         }
 
         fab.setOnClickListener { view ->
@@ -69,7 +68,7 @@ class SourceFragment : BaseFragment(), SourceView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
         R.id.remove -> {
             presenter.delete(source)
-            findNavController().popBackStack()
+            navController.popBackStack()
             true
         }
 
@@ -79,6 +78,7 @@ class SourceFragment : BaseFragment(), SourceView {
     override fun showData(source: RssSource) {
         this.source = source
 
+        setTitle(source.name)
         name.setText(source.name)
         url.setText(source.url)
     }
