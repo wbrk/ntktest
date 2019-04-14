@@ -51,6 +51,15 @@ class FeedFragment : BaseFragment(), FeedView {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) =
         inflater.inflate(R.menu.menu_feed, menu)
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.actionShowSourceList -> {
+            navController.navigate(item.itemId)
+            true
+        }
+
+        else -> false
+    }
+
     override fun showData(data: List<RssItem>) {
         adapter.data = data
         adapter.notifyDataSetChanged()
