@@ -13,68 +13,66 @@ import kotlinx.android.synthetic.main.fragment_feed.*
 import java.lang.Exception
 
 class FeedFragment : BaseFragment(), FeedView {
-
     private val adapter = FeedAdapter()
-    private lateinit var presenter: FeedPresenter
+    private val presenter = FeedPresenter(this)
 
     override val layout: Int = R.layout.fragment_feed
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter.onItemClickListener = this::openDetails
+        adapter.onItemClickListener = presenter::onItemSelected
 
         list.adapter = adapter
         list.setHasFixedSize(true)
         list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        swipeLayout.setOnRefreshListener(presenter::requestData)
-        swipeLayout.isRefreshing = true
-
-        presenter.requestData()
+        swipeLayout.setOnRefreshListener(presenter::onRefresh)
 
         setTitle(R.string.feed_screen)
+
+        presenter.start()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        presenter = FeedPresenter(this)
-
         setHasOptionsMenu(true)
     }
 
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroyView() {
+        super.onDestroyView()
         presenter.stop()
-        swipeLayout.isRefreshing = false
-        // fixme re-request data if was stopped before data arrived
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) =
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_feed, menu)
+    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.actionShowSourceList -> {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.actionShowSourceList) {
+            // todo should presenter do routing instead?
             navController.navigate(item.itemId)
-            true
+            return true
         }
-
-        else -> false
+        return false
     }
 
     override fun showData(data: List<RssItem>) {
         adapter.data = data
-        adapter.notifyDataSetChanged()
-
-        swipeLayout.isRefreshing = false
     }
 
     override fun showError() {
         Snackbar.make(feedRoot, "Error", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun showProgress() {
+        swipeLayout.isRefreshing = true
+    }
+
+    override fun hideProgress() {
         swipeLayout.isRefreshing = false
     }
 
-    private fun openDetails(position: Int) {
+    override fun openDetails(url: String) {
         try {
-            val url = adapter.data[position].link
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         } catch (e: Exception) {

@@ -15,6 +15,10 @@ class FeedAdapter : BaseAdapter<FeedAdapter.ViewHolder>() {
         : BaseViewHolder(containerView, clickListener), LayoutContainer
 
     var data: List<RssItem> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflate(R.layout.item_feed, parent)
