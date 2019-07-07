@@ -9,7 +9,9 @@ abstract class BasePresenter {
 
     open fun start() = Unit
 
-    open fun stop() = disposables.clear()
+    open fun stop() {
+        disposables.clear()
+    }
 
     protected fun Disposable.clearOnDestroy() = addTo(disposables)
 }
