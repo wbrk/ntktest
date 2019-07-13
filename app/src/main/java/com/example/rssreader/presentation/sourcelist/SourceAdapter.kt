@@ -17,7 +17,7 @@ class SourceAdapter : BaseAdapter<SourceAdapter.ViewHolder>() {
     var data: List<RssSource> = emptyList()
         set(value) {
             field = value
-            notifyDataSetChanged()
+            notifyDataSetChanged() // todo update gracefully
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -6,34 +6,74 @@ import com.example.rssreader.di.RssDatabaseFactory
 import com.example.rssreader.presentation.BasePresenter
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class SourcePresenter(private val view: SourceView) : BasePresenter() {
-    private val sourceRepo = RssSourceRepository(RssDatabaseFactory.db.sourceDao())
+class SourcePresenter(
+    private val sourceId: Int,
+    private val view: SourceView
+) : BasePresenter() {
 
-    // todo i think, control flow must be different
-    // like fragment tells presenter it's ready
-    // then presenter obtains data and sets it to fragment
-    fun getById(id: Int) {
-        sourceRepo.getById(id)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(view::showData)
-            .clearOnDestroy()
+    companion object {
+        private const val NEW_SOURCE = -1
     }
 
-    fun add(source: RssSource) {
+    private val sourceRepo = RssSourceRepository(RssDatabaseFactory.db.sourceDao())
+
+    private var source = RssSource()
+
+    private val isNewSource: Boolean
+        get() = (sourceId == NEW_SOURCE)
+
+    val shouldShowDeleteAction
+        get() = !isNewSource
+
+    // todo fix title flickering due to db load pause (use progressbar)
+    override fun start() {
+        if (isNewSource) {
+            view.showNewSourceTitle()
+        } else {
+            sourceRepo.getById(sourceId)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSuccess { source = it }
+                .subscribe(view::showSource)
+                .clearOnDestroy()
+        }
+    }
+
+    fun onSaveChangesClick(name: String, url: String) {
+        // todo validate
+        source = source.copy(
+            name = name,
+            url = url
+        )
+
+        if (isNewSource) {
+            add(source)
+        } else {
+            update(source)
+        }
+
+        view.goBack()
+    }
+
+    fun onDeleteClick() {
+        delete(source)
+        view.goBack()
+    }
+
+    private fun add(source: RssSource) {
         sourceRepo.add(source)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
             .clearOnDestroy()
     }
 
-    fun update(source: RssSource) {
+    private fun update(source: RssSource) {
         sourceRepo.update(source)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
             .clearOnDestroy()
     }
 
-    fun delete(source: RssSource) {
+    private fun delete(source: RssSource) {
         sourceRepo.delete(source)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
