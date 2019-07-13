@@ -2,6 +2,7 @@ package com.example.rssreader.presentation.sourcelist
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import com.example.rssreader.R
 import com.example.rssreader.domain.entity.RssSource
 import com.example.rssreader.presentation.BaseAdapter
@@ -16,8 +17,9 @@ class SourceAdapter : BaseAdapter<SourceAdapter.ViewHolder>() {
 
     var data: List<RssSource> = emptyList()
         set(value) {
+            val result = DiffUtil.calculateDiff(DiffCallback(field, value))
             field = value
-            notifyDataSetChanged() // todo update gracefully
+            result.dispatchUpdatesTo(this)
         }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -32,4 +34,20 @@ class SourceAdapter : BaseAdapter<SourceAdapter.ViewHolder>() {
     }
 
     override fun getItemCount(): Int = data.size
+}
+
+class DiffCallback(
+    private val old: List<RssSource>,
+    private val new: List<RssSource>
+): DiffUtil.Callback() {
+
+    override fun getOldListSize(): Int = old.size
+
+    override fun getNewListSize(): Int = new.size
+
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+        old[oldItemPosition].id == new[newItemPosition].id
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
+        old[oldItemPosition] == new[newItemPosition]
 }
