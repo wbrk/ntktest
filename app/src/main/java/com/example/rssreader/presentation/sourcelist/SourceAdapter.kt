@@ -15,6 +15,10 @@ class SourceAdapter : BaseAdapter<SourceAdapter.ViewHolder>() {
         : BaseViewHolder(containerView, clickListener), LayoutContainer
 
     var data: List<RssSource> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = inflate(R.layout.item_source, parent)

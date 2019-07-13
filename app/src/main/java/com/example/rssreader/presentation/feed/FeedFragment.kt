@@ -48,7 +48,6 @@ class FeedFragment : BaseFragment(), FeedView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.actionShowSourceList) {
-            // todo should presenter do routing instead?
             navController.navigate(item.itemId)
             return true
         }

@@ -12,46 +12,40 @@ import kotlinx.android.synthetic.main.fragment_source_list.*
 class SourceListFragment : BaseFragment(), SourceListView {
 
     private val adapter = SourceAdapter()
-    private lateinit var presenter: SourceListPresenter
+    private val presenter = SourceListPresenter(this)
 
     override val layout: Int = R.layout.fragment_source_list
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter.onItemClickListener = { position ->
-            val sourceId = adapter.data[position].id
-            val action = SourceListFragmentDirections.actionEditSource(sourceId)
-            navController.navigate(action)
-        }
+        adapter.onItemClickListener = presenter::onItemClick
 
         list.adapter = adapter
         list.setHasFixedSize(true)
         list.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        fab.setOnClickListener { v ->
-            v.findNavController().navigate(R.id.actionEditSource)
-        }
+        fab.setOnClickListener { presenter.onFabClick() }
 
         setTitle(R.string.sources_screen)
         setNavigationIcon(R.drawable.ic_arrow_back_24dp)
+
+        presenter.start()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        presenter = SourceListPresenter(this)
-    }
-
-    override fun onStop() {
-        super.onStop()
+    override fun onDestroyView() {
+        super.onDestroyView()
         presenter.stop()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        presenter.requestData()
     }
 
     override fun showData(data: List<RssSource>) {
         adapter.data = data
-        adapter.notifyDataSetChanged()
+    }
+
+    override fun openEditSource(sourceId: Int) {
+        val action = SourceListFragmentDirections.actionEditSource(sourceId)
+        navController.navigate(action)
+    }
+
+    override fun openNewSource() {
+        navController.navigate(R.id.actionEditSource)
     }
 }
