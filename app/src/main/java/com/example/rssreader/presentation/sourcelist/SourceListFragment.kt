@@ -3,8 +3,7 @@ package com.example.rssreader.presentation.sourcelist
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.View
-import androidx.navigation.findNavController
-import com.example.rssreader.BaseFragment
+import com.example.rssreader.presentation.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.domain.entity.RssSource
 import kotlinx.android.synthetic.main.fragment_source_list.*

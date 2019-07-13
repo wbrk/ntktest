@@ -1,4 +1,4 @@
-package com.example.rssreader
+package com.example.rssreader.extensions
 
 import android.app.Activity
 import android.content.Context

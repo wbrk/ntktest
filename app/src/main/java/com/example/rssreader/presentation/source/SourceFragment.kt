@@ -3,7 +3,7 @@ package com.example.rssreader.presentation.source
 import android.os.Bundle
 import android.view.*
 import androidx.navigation.fragment.navArgs
-import com.example.rssreader.BaseFragment
+import com.example.rssreader.presentation.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.domain.entity.RssSource
 import kotlinx.android.synthetic.main.fragment_source.*

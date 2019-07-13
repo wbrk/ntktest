@@ -1,4 +1,4 @@
-package com.example.rssreader
+package com.example.rssreader.extensions
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable

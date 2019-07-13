@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.*
-import com.example.rssreader.BaseFragment
+import com.example.rssreader.presentation.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.domain.entity.RssItem
 import kotlinx.android.synthetic.main.fragment_feed.*

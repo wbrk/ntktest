@@ -1,4 +1,4 @@
-package com.example.rssreader
+package com.example.rssreader.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.rssreader.R
+import com.example.rssreader.extensions.hideKeyboard
 
 abstract class BaseFragment : Fragment() {
     protected abstract val layout: Int

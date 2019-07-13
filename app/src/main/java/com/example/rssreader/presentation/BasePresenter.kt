@@ -1,6 +1,6 @@
 package com.example.rssreader.presentation
 
-import com.example.rssreader.addTo
+import com.example.rssreader.extensions.addTo
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
