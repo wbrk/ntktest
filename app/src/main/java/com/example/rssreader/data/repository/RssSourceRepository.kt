@@ -8,8 +8,8 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 class RssSourceRepository(private val sourceDao: RssSourceDao) {
-    fun getSources(): Single<List<RssSource>> =
-        sourceDao.all()
+    val sources: Single<List<RssSource>>
+        get() = sourceDao.all()
             .subscribeOn(Schedulers.io())
 
     fun getById(id: Int): Maybe<RssSource> =

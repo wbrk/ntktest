@@ -12,7 +12,7 @@ class SourceListPresenter(private val view: SourceListView) : BasePresenter() {
     private lateinit var data: List<RssSource>
 
     override fun start() {
-        sourceRepo.getSources()
+        sourceRepo.sources
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSuccess { data = it }
             .subscribe(view::showData)

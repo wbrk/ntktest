@@ -1,6 +1,5 @@
 package com.example.rssreader.data.model
 
-import com.example.rssreader.data.model.RssItemModel
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Path
 import org.simpleframework.xml.Root
