@@ -28,12 +28,12 @@ class SourcePresenter(
     // todo fix title flickering due to db load pause (use progressbar)
     override fun start() {
         if (isNewSource) {
-            view.showNewSourceTitle()
+            view.showNewSource()
         } else {
             sourceRepo.getById(sourceId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSuccess { source = it }
-                .subscribe(view::showSource)
+                .subscribe(view::showExistingSource)
                 .clearOnDestroy()
         }
     }

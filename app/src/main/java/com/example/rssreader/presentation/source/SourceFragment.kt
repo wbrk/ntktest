@@ -6,6 +6,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.rssreader.presentation.BaseFragment
 import com.example.rssreader.R
 import com.example.rssreader.domain.entity.RssSource
+import com.example.rssreader.extensions.setSelectionToEnd
+import com.example.rssreader.extensions.showKeyboardForView
 import kotlinx.android.synthetic.main.fragment_source.*
 
 // todo break project into modules by feature?
@@ -50,17 +52,21 @@ class SourceFragment : BaseFragment(), SourceView {
         else -> super.onOptionsItemSelected(item)
     }
 
-    override fun showNewSourceTitle() {
-        setTitle(R.string.new_screen)
-    }
-
     override fun goBack() {
         navController.popBackStack()
     }
 
-    override fun showSource(source: RssSource) {
+    override fun showNewSource() {
+        setTitle(R.string.new_screen)
+        requireActivity().showKeyboardForView(name)
+    }
+
+    override fun showExistingSource(source: RssSource) {
         setTitle(source.name)
         name.setText(source.name)
         url.setText(source.url)
+
+        name.setSelectionToEnd()
+        requireActivity().showKeyboardForView(name)
     }
 }

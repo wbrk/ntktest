@@ -3,9 +3,9 @@ package com.example.rssreader.presentation.source
 import com.example.rssreader.domain.entity.RssSource
 
 interface SourceView {
-    fun showSource(source: RssSource)
+    fun showExistingSource(source: RssSource)
 
-    fun showNewSourceTitle()
+    fun showNewSource()
 
     fun goBack()
 }
