@@ -10,7 +10,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class FeedPresenter(private val view: FeedView) : BasePresenter() {
     private val itemRepository = RssItemRepository(RssServiceFactory.service)
-    private var data: List<RssItem>? = null
+    private lateinit var data: List<RssItem>
 
     override fun start() {
         load()
@@ -21,10 +21,8 @@ class FeedPresenter(private val view: FeedView) : BasePresenter() {
         load()
     }
 
-    fun onItemSelected(position: Int) {
-        data?.let {
-            view.openDetails(it[position].link)
-        }
+    fun onItemClick(position: Int) {
+        view.openDetails(data[position].link)
     }
 
     private fun load() {

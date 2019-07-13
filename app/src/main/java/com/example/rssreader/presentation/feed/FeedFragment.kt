@@ -19,7 +19,7 @@ class FeedFragment : BaseFragment(), FeedView {
     override val layout: Int = R.layout.fragment_feed
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter.onItemClickListener = presenter::onItemSelected
+        adapter.onItemClickListener = presenter::onItemClick
 
         list.adapter = adapter
         list.setHasFixedSize(true)
