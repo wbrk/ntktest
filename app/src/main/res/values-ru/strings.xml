@@ -7,4 +7,6 @@
     <string name="new_screen">Новый источник</string>
     <string name="hint_name">Название</string>
     <string name="hint_url">Ссылка</string>
+    <string name="source_has_been_removed">Источник удалён</string>
+    <string name="undo">Отмена</string>
 </resources>

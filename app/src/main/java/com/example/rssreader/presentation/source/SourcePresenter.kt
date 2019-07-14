@@ -22,9 +22,6 @@ class SourcePresenter(
     private val isNewSource: Boolean
         get() = (sourceId == NEW_SOURCE)
 
-    val shouldShowDeleteAction
-        get() = !isNewSource
-
     // todo fix title flickering due to db load pause (use progressbar)
     override fun start() {
         if (isNewSource) {
@@ -54,11 +51,6 @@ class SourcePresenter(
         view.goBack()
     }
 
-    fun onDeleteClick() {
-        delete(source)
-        view.goBack()
-    }
-
     private fun add(source: RssSource) {
         sourceRepo.add(source)
             .observeOn(AndroidSchedulers.mainThread())
@@ -68,13 +60,6 @@ class SourcePresenter(
 
     private fun update(source: RssSource) {
         sourceRepo.update(source)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
-            .clearOnDestroy()
-    }
-
-    private fun delete(source: RssSource) {
-        sourceRepo.delete(source)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
             .clearOnDestroy()

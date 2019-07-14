@@ -7,4 +7,6 @@
     <string name="new_screen">New source</string>
     <string name="hint_name">Name</string>
     <string name="hint_url">Link</string>
+    <string name="source_has_been_removed">Source has been removed</string>
+    <string name="undo">Undo</string>
 </resources>

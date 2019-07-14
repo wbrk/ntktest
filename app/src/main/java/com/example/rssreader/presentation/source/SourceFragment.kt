@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_source.*
 
 // todo break project into modules by feature?
 class SourceFragment : BaseFragment(), SourceView {
+
     private lateinit var presenter: SourcePresenter
 
     private val args: SourceFragmentArgs by navArgs()
@@ -23,7 +24,6 @@ class SourceFragment : BaseFragment(), SourceView {
         presenter.start()
 
         setNavigationIcon(R.drawable.ic_arrow_back_24dp)
-        setHasOptionsMenu(true)
 
         fab.setOnClickListener {
             presenter.onSaveChangesClick(
@@ -36,20 +36,6 @@ class SourceFragment : BaseFragment(), SourceView {
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.stop()
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_source, menu)
-        menu.findItem(R.id.remove).isVisible = presenter.shouldShowDeleteAction
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
-        R.id.remove -> {
-            presenter.onDeleteClick()
-            true
-        }
-
-        else -> super.onOptionsItemSelected(item)
     }
 
     override fun goBack() {

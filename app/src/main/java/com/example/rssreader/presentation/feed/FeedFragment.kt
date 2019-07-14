@@ -59,6 +59,7 @@ class FeedFragment : BaseFragment(), FeedView {
     }
 
     override fun showError() {
+        // todo
         Snackbar.make(feedRoot, "Error", Snackbar.LENGTH_SHORT).show()
     }
 
@@ -75,6 +76,7 @@ class FeedFragment : BaseFragment(), FeedView {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         } catch (e: Exception) {
+            // todo why hardcode?
             Snackbar.make(feedRoot, "Couldn't open item", Snackbar.LENGTH_SHORT).show()
         }
     }
